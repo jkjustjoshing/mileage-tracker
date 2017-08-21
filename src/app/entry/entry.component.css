@@ -1,0 +1,10 @@
+div {
+    display: flex;
+    background: #eee;
+    box-shadow: 1px 1px 1px #444;
+    margin: 5px;
+}
+
+p {
+    flex-grow: 1;
+}
