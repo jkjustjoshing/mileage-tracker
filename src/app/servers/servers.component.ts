@@ -7,16 +7,12 @@ import { Entry } from '../entry/entry.model';
   styleUrls: ['./servers.component.css']
 })
 export class ServersComponent implements OnInit {
-  entry: Entry = new Entry();
-
   entries: Entry[] = [];
 
   ngOnInit() {
   }
 
-  createEntry() {
-    this.entries.unshift(this.entry);
-    this.entry = new Entry();
+  onEntryCreated(entry: Entry) {
+    this.entries.unshift(entry);
   }
-
 }
