@@ -1,8 +1,11 @@
-<input [(ngModel)]="entry.date" placeholder="date" type="text" />
-<input [(ngModel)]="entry.gallons" placeholder="gallons" type="number" />
-<input [(ngModel)]="entry.odometer" placeholder="odometer" type="number" />
+<form name="newEntry">
+  <input [(ngModel)]="entry.date" placeholder="date" name="date" type="text" />
+  <input [(ngModel)]="entry.gallons" placeholder="gallons" name="gallons" type="number" />
+  <input [(ngModel)]="entry.odometer" placeholder="odometer" name="odometer" type="number" />
 
-<button class="btn btn-primary"
-        [disabled]="entry.isEmpty()"
-        (click)="createEntry()">Add Entry</button>
-<app-entry *ngFor="let entry of entries"></app-entry>
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="entry.isEmpty()"
+          (click)="createEntry()">Add Entry</button>
+</form>
+<app-entry *ngFor="let entry of entries" [entry]="entry"></app-entry>
