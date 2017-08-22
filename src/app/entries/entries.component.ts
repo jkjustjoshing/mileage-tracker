@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Entry } from '../entry/entry.model';
 
 @Component({
-  selector: 'app-servers',
-  templateUrl: './servers.component.html',
-  styleUrls: ['./servers.component.css']
+  selector: 'app-entries',
+  templateUrl: './entries.component.html',
+  styleUrls: ['./entries.component.css']
 })
-export class ServersComponent implements OnInit {
+export class EntriesComponent implements OnInit {
   entries: Entry[] = [];
 
   ngOnInit() {
