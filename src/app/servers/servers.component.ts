@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Entry } from '../entry/entry.model';
 
 @Component({
   selector: 'app-servers',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servers.component.css']
 })
 export class ServersComponent implements OnInit {
+  entry: Entry = new Entry();
 
-  constructor() { }
+  entries: Entry[] = [];
 
   ngOnInit() {
+  }
+
+  createEntry() {
+    this.entries.unshift(this.entry);
+    this.entry = new Entry();
   }
 
 }

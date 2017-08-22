@@ -1,2 +1,8 @@
-<app-server></app-server>
-<app-server></app-server>
+<input [(ngModel)]="entry.date" placeholder="date" type="text" />
+<input [(ngModel)]="entry.gallons" placeholder="gallons" type="number" />
+<input [(ngModel)]="entry.odometer" placeholder="odometer" type="number" />
+
+<button class="btn btn-primary"
+        [disabled]="entry.isEmpty()"
+        (click)="createEntry()">Add Entry</button>
+<app-entry *ngFor="let entry of entries"></app-entry>
