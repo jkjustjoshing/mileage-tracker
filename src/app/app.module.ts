@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { EntriesComponent } from './entries/entries.component';
 import { EntryComponent } from './entry/entry.component';
 import { NewEntryComponent } from './new-entry/new-entry.component';
+import { HeaderComponent } from './header/header.component';
+import { NavLinkComponent } from './header/nav-link/nav-link.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EntriesComponent,
     EntryComponent,
-    NewEntryComponent
+    NewEntryComponent,
+    HeaderComponent,
+    NavLinkComponent
   ],
   imports: [
     BrowserModule,

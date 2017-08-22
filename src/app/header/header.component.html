@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand" href="#">Mileage Tracker</a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+  <ul class="navbar-nav">
+    <app-nav-link [active]="currentPage === 'vehicles'" (click)="navigateTo('vehicles')">Vehicles</app-nav-link>
+    <app-nav-link [active]="currentPage === 'entries'"  (click)="navigateTo('entries')">Entries</app-nav-link>
+  </ul>
+</nav>

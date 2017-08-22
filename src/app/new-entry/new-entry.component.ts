@@ -4,7 +4,7 @@ import { Entry } from '../entry/entry.model';
 @Component({
   selector: 'app-new-entry',
   templateUrl: './new-entry.component.html',
-  styleUrls: ['./new-entry.component.css']
+  styleUrls: ['./new-entry.component.scss']
 })
 export class NewEntryComponent implements OnInit {
   @Output()

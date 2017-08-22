@@ -1,4 +1,3 @@
-<header>
-  Mileage Log
-</header>
-<app-entries></app-entries>
+<app-header (pageChange)="changePage($event)"></app-header>
+
+<app-entries *ngIf="currentPage === 'entries'"></app-entries>
