@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Entry } from './entry.model';
+import { EntriesService } from './entries.service';
 
 @Component({
   selector: 'app-entries',
@@ -7,12 +8,21 @@ import { Entry } from './entry.model';
   styleUrls: ['./entries.component.scss']
 })
 export class EntriesComponent implements OnInit {
-  entries: Entry[] = [];
+  entries: Entry[];
+  totalGallons: number;
+
+
+  constructor(private entriesService: EntriesService) {}
 
   ngOnInit() {
+    this.entries = this.entriesService.entries;
+    this.totalGallons = this.entriesService.totalGallons();
   }
 
   onEntryCreated(entry: Entry) {
-    this.entries.unshift(entry);
+    this.entriesService.addEntry(entry);
+
+    this.totalGallons = this.entriesService.totalGallons();
   }
+
 }

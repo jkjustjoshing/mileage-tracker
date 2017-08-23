@@ -9,6 +9,7 @@ import { NewEntryComponent } from './entries/new-entry/new-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { NavLinkComponent } from './header/nav-link/nav-link.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { EntriesService } from './entries/entries.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EntriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

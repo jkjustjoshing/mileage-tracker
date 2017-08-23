@@ -1,2 +1,3 @@
 <app-new-entry (entryCreated)="onEntryCreated($event)"></app-new-entry>
+<p> Total Gallons: {{ totalGallons }}</p>
 <app-entry *ngFor="let entry of entries" [entry]="entry"></app-entry>
