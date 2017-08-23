@@ -15,13 +15,13 @@ export class EntriesComponent implements OnInit {
   constructor(private entriesService: EntriesService) {}
 
   ngOnInit() {
-    this.entries = this.entriesService.entries;
+    this.entries = this.entriesService.getEntries();
+    this.entriesService.entriesChanged.subscribe((entries: Entry[]) => this.entries = entries);
     this.totalGallons = this.entriesService.totalGallons();
   }
 
   onEntryCreated(entry: Entry) {
     this.entriesService.addEntry(entry);
-
     this.totalGallons = this.entriesService.totalGallons();
   }
 
