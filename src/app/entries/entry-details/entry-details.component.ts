@@ -15,8 +15,9 @@ export class EntryDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private entryService: EntriesService) { }
 
   ngOnInit() {
-    console.log('getting entry');
-    this.entryService.getEntry(this.route.snapshot.params['id']).subscribe(entry => this.entry = entry);
+    this.route.params
+      .flatMap(params => this.entryService.getEntry(params.id))
+      .subscribe(entry => this.entry = entry);
   }
 
 }

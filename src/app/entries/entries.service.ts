@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/Rx';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Injectable()
 export class EntriesService {
@@ -29,7 +29,7 @@ export class EntriesService {
     return this.entries;
   }
 
-  getEntry(id) {
+  getEntry(id): FirebaseObjectObservable<Entry> {
     console.log('getting entry');
     return this.angularFireDb.object(`/entries/${id}`);
   }
