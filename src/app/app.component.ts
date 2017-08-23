@@ -5,10 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public currentPage: string;
-
-  changePage(page: string) {
-    this.currentPage = page;
-  }
-}
+export class AppComponent { }
