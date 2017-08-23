@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Entry } from './entry.model';
 import { EntriesService } from './entries.service';
 
+import { FirebaseListObservable } from 'angularfire2/database';
+
 @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
   styleUrls: ['./entries.component.scss']
 })
 export class EntriesComponent implements OnInit {
-  entries: Entry[];
+  entries: FirebaseListObservable<Entry[]>;
   totalGallons: number;
 
 
@@ -16,13 +18,15 @@ export class EntriesComponent implements OnInit {
 
   ngOnInit() {
     this.entries = this.entriesService.getEntries();
-    this.entriesService.entriesChanged.subscribe((entries: Entry[]) => this.entries = entries);
-    this.totalGallons = this.entriesService.totalGallons();
+    console.log(this.entriesService.totalGallons);
+    this.entriesService.totalGallons.subscribe(gallons => {
+      console.log('gallons', gallons);
+      this.totalGallons = gallons;
+    });
   }
 
   onEntryCreated(entry: Entry) {
     this.entriesService.addEntry(entry);
-    this.totalGallons = this.entriesService.totalGallons();
   }
 
 }
