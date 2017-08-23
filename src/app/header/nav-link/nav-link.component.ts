@@ -10,6 +10,9 @@ export class NavLinkComponent implements OnInit {
   @Input()
   public active: boolean;
 
+  @Input()
+  public target: string;
+
   constructor() { }
 
   ngOnInit() {
