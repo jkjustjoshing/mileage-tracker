@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EntriesComponent } from './entries/entries.component';
-import { EntryComponent } from './entry/entry.component';
-import { NewEntryComponent } from './new-entry/new-entry.component';
+import { EntryComponent } from './entries/entry/entry.component';
+import { NewEntryComponent } from './entries/new-entry/new-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { NavLinkComponent } from './header/nav-link/nav-link.component';
 import { DropdownDirective } from './shared/dropdown.directive';

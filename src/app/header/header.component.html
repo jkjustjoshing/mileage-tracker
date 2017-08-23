@@ -8,4 +8,15 @@
     <app-nav-link [active]="currentPage === 'vehicles'" (click)="navigateTo('vehicles')">Vehicles</app-nav-link>
     <app-nav-link [active]="currentPage === 'entries'"  (click)="navigateTo('entries')">Entries</app-nav-link>
   </ul>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" #dropdownTrigger data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu show" aria-labelledby="dropdownMenuButton" [appDropdown]="dropdownTrigger">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div>
 </nav>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Entry } from '../entry/entry.model';
+import { Entry } from '../entry.model';
 
 @Component({
   selector: 'app-new-entry',
