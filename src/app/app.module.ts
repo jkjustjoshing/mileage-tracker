@@ -8,6 +8,7 @@ import { EntryComponent } from './entry/entry.component';
 import { NewEntryComponent } from './new-entry/new-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { NavLinkComponent } from './header/nav-link/nav-link.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavLinkComponent } from './header/nav-link/nav-link.component';
     EntryComponent,
     NewEntryComponent,
     HeaderComponent,
-    NavLinkComponent
+    NavLinkComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
