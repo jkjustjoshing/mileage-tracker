@@ -15,6 +15,7 @@ export class EntriesService {
     this.entries = this.angularFireDb.list('/entries');
     this.totalGallons = this.entries.scan((acc, arr: Entry[]) => {
       return arr.reduce((sum, next) => {
+        console.log(next);
         return sum + next.gallons;
       }, 0);
     }, 0);
@@ -28,5 +29,9 @@ export class EntriesService {
     return this.entries;
   }
 
+  getEntry(id) {
+    console.log('getting entry');
+    return this.angularFireDb.object(`/entries/${id}`);
+  }
 
 }

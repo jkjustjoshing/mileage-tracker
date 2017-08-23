@@ -17,6 +17,7 @@ import { NavLinkComponent } from './header/nav-link/nav-link.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { EntriesService } from './entries/entries.service';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { EntryDetailsComponent } from './entries/entry-details/entry-details.component';
 
 const appRoutes: Routes = [
   // {
@@ -26,6 +27,10 @@ const appRoutes: Routes = [
   {
     path: 'entries',
     component: EntriesComponent
+  },
+  {
+    path: 'entries/:id',
+    component: EntryDetailsComponent
   },
   {
     path: 'vehicles',
@@ -42,7 +47,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     NavLinkComponent,
     DropdownDirective,
-    VehiclesComponent
+    VehiclesComponent,
+    EntryDetailsComponent
   ],
   imports: [
     BrowserModule,
