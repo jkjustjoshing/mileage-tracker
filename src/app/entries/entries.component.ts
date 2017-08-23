@@ -18,9 +18,7 @@ export class EntriesComponent implements OnInit {
 
   ngOnInit() {
     this.entries = this.entriesService.getEntries();
-    console.log(this.entriesService.totalGallons);
     this.entriesService.totalGallons.subscribe(gallons => {
-      console.log('gallons', gallons);
       this.totalGallons = gallons;
     });
   }
