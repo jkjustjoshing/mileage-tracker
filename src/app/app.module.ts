@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EntriesComponent } from './entries/entries.component';
 import { EntryComponent } from './entries/entry/entry.component';
@@ -23,14 +22,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { SignupComponent } from './auth/signup/signup.component';
-
-const appRoutes: Routes = [
-  { path: 'login',       component: LoginComponent },
-  { path: 'signup',      component: SignupComponent },
-  { path: 'entries',     component: EntriesComponent,      canActivate: [AuthGuardService] },
-  { path: 'entries/:id', component: EntryDetailsComponent, canActivate: [AuthGuardService] },
-  { path: 'vehicles',    component: VehiclesComponent,     canActivate: [AuthGuardService] }
-];
 
 @NgModule({
   declarations: [
@@ -49,7 +40,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule
