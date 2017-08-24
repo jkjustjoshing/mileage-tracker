@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 import { AppComponent } from './app.component';
@@ -18,12 +19,19 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { EntriesService } from './entries/entries.service';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { EntryDetailsComponent } from './entries/entry-details/entry-details.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthService } from './auth/auth.service';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const appRoutes: Routes = [
-  // {
-  //   path: '',
-  //   component:
-  // },
+  {
+    path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  },
   {
     path: 'entries',
     component: EntriesComponent
@@ -48,16 +56,19 @@ const appRoutes: Routes = [
     NavLinkComponent,
     DropdownDirective,
     VehiclesComponent,
-    EntryDetailsComponent
+    EntryDetailsComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [EntriesService],
+  providers: [EntriesService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
