@@ -21,29 +21,15 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { EntryDetailsComponent } from './entries/entry-details/entry-details.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 import { SignupComponent } from './auth/signup/signup.component';
 
 const appRoutes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'signup',
-    component: SignupComponent
-  },
-  {
-    path: 'entries',
-    component: EntriesComponent
-  },
-  {
-    path: 'entries/:id',
-    component: EntryDetailsComponent
-  },
-  {
-    path: 'vehicles',
-    component: VehiclesComponent
-  }
+  { path: 'login',       component: LoginComponent },
+  { path: 'signup',      component: SignupComponent },
+  { path: 'entries',     component: EntriesComponent,      canActivate: [AuthGuardService] },
+  { path: 'entries/:id', component: EntryDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'vehicles',    component: VehiclesComponent,     canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -68,7 +54,7 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [EntriesService, AuthService],
+  providers: [EntriesService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
