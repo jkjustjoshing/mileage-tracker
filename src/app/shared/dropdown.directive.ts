@@ -12,12 +12,9 @@ export class DropdownDirective implements OnInit {
   @HostBinding('class.show')
   public dropdownOpen = false;
 
-  constructor(private renderer: Renderer2, private elRef: ElementRef) {
-    console.log('foo');
-  }
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {}
 
   ngOnInit() {
-    console.log(this.triggerEle);
     this.renderer.listen(this.triggerEle, 'click', this.toggle);
   }
 

@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   logout() {
-    this.angularFireAuth.auth.signOut();
+    this.angularFireAuth.auth.signOut().then(() => this.router.navigate(['/']));
   }
 
   private redirectOnLogin() {

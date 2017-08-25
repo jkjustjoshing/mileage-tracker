@@ -1,6 +1,9 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { User } from 'firebase';
+
+import 'rxjs/Rx';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -8,7 +11,9 @@ export class AuthGuardService implements CanActivate {
   constructor(private authService: AuthService  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.authService.isAuthenticated();
+    return this.authService.loggedInState.scan<User, boolean>((previousValue, user) => {
+      return Boolean(user);
+    }, false);
   }
 
 }
