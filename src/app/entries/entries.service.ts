@@ -8,30 +8,39 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 
 @Injectable()
 export class EntriesService {
-  public totalGallons: Observable<number>;
-  private entries: FirebaseListObservable<Entry[]>;
+  private entries: { [name: string]: FirebaseListObservable<Entry[]> } = {};
+  private totalGallonsCache: { [name: string]: Observable<number> } = {};
 
-  constructor(private angularFireDb: AngularFireDatabase) {
-    this.entries = this.angularFireDb.list('/entries');
-    this.totalGallons = this.entries.scan((acc, arr: Entry[]) => {
-      return arr.reduce((sum, next) => {
-        console.log(next);
-        return sum + next.gallons;
+  constructor(private angularFireDb: AngularFireDatabase) {}
+
+  addEntry(uid: string, entry: Entry) {
+    if (!this.entries[uid]) {
+      this.entries[uid] = this.getEntries(uid);
+    }
+    this.entries[uid].push(entry);
+  }
+
+  getEntries(uid): FirebaseListObservable<Entry[]> {
+    if (!this.entries[uid]) {
+      this.entries[uid] = this.angularFireDb.list(`/entries/${uid}`);
+    }
+    return this.entries[uid];
+  }
+
+  totalGallons(uid): Observable<number> {
+    if (!this.totalGallonsCache[uid]) {
+      this.totalGallonsCache[uid] = this.entries[uid].scan((acc, arr: Entry[]) => {
+        return arr.reduce((sum, next) => {
+          return sum + next.gallons;
+        }, 0);
       }, 0);
-    }, 0);
+    }
+    return this.totalGallonsCache[uid];
   }
 
-  addEntry(entry: Entry) {
-    this.entries.push(entry);
-  }
-
-  getEntries() {
-    return this.entries;
-  }
-
-  getEntry(id): FirebaseObjectObservable<Entry> {
+  getEntry(uid: string, id: string): FirebaseObjectObservable<Entry> {
     console.log('getting entry');
-    return this.angularFireDb.object(`/entries/${id}`);
+    return this.angularFireDb.object(`/entries/${uid}/${id}`);
   }
 
 }

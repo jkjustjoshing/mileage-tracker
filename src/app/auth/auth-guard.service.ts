@@ -1,12 +1,12 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { User } from 'firebase';
 
 import 'rxjs/Rx';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate, CanActivateChild {
 
   constructor(private authService: AuthService  ) { }
 
@@ -16,4 +16,9 @@ export class AuthGuardService implements CanActivate {
     }, false);
   }
 
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.authService.loggedInState.scan<User, boolean>((previousValue, user) => {
+      return user.uid === route.params.uid;
+    }, false);
+  }
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Entry } from './entry.model';
 import { EntriesService } from './entries.service';
@@ -16,11 +17,12 @@ export class EntriesComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
 
-  constructor(private entriesService: EntriesService) {}
+  constructor(private entriesService: EntriesService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.entries = this.entriesService.getEntries();
-    this.subscription = this.entriesService.totalGallons.subscribe(gallons => {
+    const uid = this.route.snapshot.params.uid;
+    this.entries = this.entriesService.getEntries(uid);
+    this.subscription = this.entriesService.totalGallons(uid).subscribe(gallons => {
       this.totalGallons = gallons;
     });
   }
@@ -30,7 +32,8 @@ export class EntriesComponent implements OnInit, OnDestroy {
   }
 
   onEntryCreated(entry: Entry) {
-    this.entriesService.addEntry(entry);
+    const uid = this.route.snapshot.params.uid;
+    this.entriesService.addEntry(uid, entry);
   }
 
 }

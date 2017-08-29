@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public currentUser: User;
+  public currentUser: User = <User> {};
 
   constructor (private authService: AuthService) {}
 

@@ -5,8 +5,8 @@
     </button> -->
 
   <ul class="navbar-nav" *ngIf="currentUser">
-    <app-nav-link target="/vehicles">Vehicles</app-nav-link>
-    <app-nav-link target="/entries">Entries</app-nav-link>
+    <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
+    <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
   </ul>
 
   <div ngbDropdown>
@@ -20,8 +20,8 @@
       </ng-template>
       <ng-template [ngIf]="currentUser">
         <button class="dropdown-item" (click)="onLogout()" type="button">Logout</button>
-        <app-nav-link target="/vehicles">Vehicles</app-nav-link>
-        <app-nav-link target="/entries">Entries</app-nav-link>
+        <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
+        <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
       </ng-template>
     </div>
   </div>

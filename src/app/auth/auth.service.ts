@@ -14,11 +14,11 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    this.angularFireAuth.auth.signInWithEmailAndPassword(username, password).then(() => this.redirectOnLogin());
+    this.angularFireAuth.auth.signInWithEmailAndPassword(username, password).then(this.redirectOnLogin.bind(this));
   }
 
   signup(username: string, password: string) {
-    this.angularFireAuth.auth.createUserWithEmailAndPassword(username, password).then(() => this.redirectOnLogin());
+    this.angularFireAuth.auth.createUserWithEmailAndPassword(username, password).then(this.redirectOnLogin.bind(this));
   }
 
   currentUser() {
@@ -29,11 +29,11 @@ export class AuthService {
   }
 
   logout() {
-    this.angularFireAuth.auth.signOut().then(() => this.router.navigate(['/']));
+    this.router.navigate(['/']).then(() => this.angularFireAuth.auth.signOut());
   }
 
-  private redirectOnLogin() {
-    return this.router.navigate(['/vehicles']);
+  private redirectOnLogin(user: User) {
+    return this.router.navigate(['/user', user.email, 'vehicles']);
   }
 
 }

@@ -20,7 +20,7 @@ export class EntryDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.route.params
-      .flatMap(params => this.entryService.getEntry(params.id))
+      .flatMap(params => this.entryService.getEntry(params.uid, params.id))
       .subscribe(entry => this.entry = entry);
   }
 
