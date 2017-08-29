@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Entry } from '../entry.model';
+import { calendar } from 'octicons';
 
 @Component({
   selector: 'app-new-entry',
@@ -11,10 +13,12 @@ export class NewEntryComponent implements OnInit {
   entryCreated = new EventEmitter<Entry>();
 
   entry: Entry = new Entry();
+  calendarIcon: SafeHtml;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.calendarIcon = this.sanitizer.bypassSecurityTrustHtml(calendar.toSVG());
   }
 
   createEntry() {

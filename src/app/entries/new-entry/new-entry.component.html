@@ -1,5 +1,9 @@
 <form name="newEntry">
-  <input [(ngModel)]="entry.date" placeholder="date" name="date" type="text" />
+  <div class="input-group">
+    <label for="date">Date</label>
+    <input class="form-control" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="entry.date" placeholder="YYYY-MM-DD" name="date" id="date" type="text" />
+    <button (click)="d.toggle()" class="input-group-addon" [innerHtml]="calendarIcon"></button>
+  </div>
   <input [(ngModel)]="entry.gallons" placeholder="gallons" name="gallons" type="number" />
   <input [(ngModel)]="entry.odometer" placeholder="odometer" name="odometer" type="number" />
   <input [(ngModel)]="entry.totalPrice" placeholder="Total Cost" name="totalPrice" type="number" />
