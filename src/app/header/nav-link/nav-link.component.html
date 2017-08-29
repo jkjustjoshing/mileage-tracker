@@ -1,6 +1,4 @@
-<li class="nav-item" routerLinkActive="active">
-  <a class="nav-link" [routerLink]="target">
-    <ng-content></ng-content>
-    <span class="sr-only" *ngIf="active">(current)</span>
-  </a>
-</li>
+<a class="dropdown-item" routerLinkActive="active" [routerLink]="target">
+  <ng-content></ng-content>
+  <span class="sr-only" *ngIf="active">(current)</span>
+</a>

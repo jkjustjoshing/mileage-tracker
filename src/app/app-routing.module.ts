@@ -11,9 +11,11 @@ import { LoginComponent } from './auth/login/login.component';
 const appRoutes: Routes = [
   { path: 'login',       component: LoginComponent },
   { path: 'signup',      component: SignupComponent },
-  { path: 'entries',     component: EntriesComponent,      canActivate: [AuthGuardService] },
-  { path: 'entries/:id', component: EntryDetailsComponent, canActivate: [AuthGuardService] },
-  { path: 'vehicles',    component: VehiclesComponent,     canActivate: [AuthGuardService] }
+  { path: 'user/:uid',        canActivate: [AuthGuardService], canActivateChild: [AuthGuardService], children: [
+    { path: 'entries',     component: EntriesComponent },
+    { path: 'entries/:id', component: EntryDetailsComponent },
+    { path: 'vehicles',    component: VehiclesComponent }
+  ] }
 ];
 
 @NgModule({

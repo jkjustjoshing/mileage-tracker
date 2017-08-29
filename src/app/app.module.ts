@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -14,7 +15,6 @@ import { EntryComponent } from './entries/entry/entry.component';
 import { NewEntryComponent } from './entries/new-entry/new-entry.component';
 import { HeaderComponent } from './header/header.component';
 import { NavLinkComponent } from './header/nav-link/nav-link.component';
-import { DropdownDirective } from './shared/dropdown.directive';
 import { EntriesService } from './entries/entries.service';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { EntryDetailsComponent } from './entries/entry-details/entry-details.component';
@@ -31,7 +31,6 @@ import { SignupComponent } from './auth/signup/signup.component';
     NewEntryComponent,
     HeaderComponent,
     NavLinkComponent,
-    DropdownDirective,
     VehiclesComponent,
     EntryDetailsComponent,
     LoginComponent,
@@ -43,7 +42,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgbModule.forRoot()
   ],
   providers: [EntriesService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
