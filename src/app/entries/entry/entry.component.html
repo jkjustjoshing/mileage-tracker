@@ -1,5 +1,12 @@
-<a [routerLink]="entry.$key">
-  <p>Date:     {{ entry.date }}</p>
-  <p>Gallons:  {{ entry.gallons }}</p>
-  <p>Odometer: {{ entry.odometer }}</p>
-</a>
+<div class="card" [routerLink]="entry.$key">
+  <div class="card-header">
+    {{ entry.date }}
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+      <p>Gallons:  {{ entry.gallons }}</p>
+      <p>Odometer: {{ entry.odometer }}</p>
+      <p>Cost: {{ entry.totalPrice }}</p>
+    </div>
+  </div>
+</div>
