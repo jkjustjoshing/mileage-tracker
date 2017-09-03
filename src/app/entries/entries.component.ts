@@ -31,9 +31,4 @@ export class EntriesComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onEntryCreated(entry: Entry) {
-    const uid = this.route.snapshot.params.uid;
-    this.entriesService.addEntry(uid, entry);
-  }
-
 }

@@ -1,15 +1,30 @@
-<form name="newEntry">
-  <div class="input-group">
+<a class="btn btn-warning" routerLink="..">Cancel</a>
+<form name="newEntry" (submit)="createEntry()">
+  <div class="form-group">
     <label for="date">Date</label>
-    <input class="form-control" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="entry.date" placeholder="YYYY-MM-DD" name="date" id="date" type="text" />
-    <button (click)="d.toggle()" class="input-group-addon" [innerHtml]="calendarIcon"></button>
+      <input class="form-control"
+        ngbDatepicker #d="ngbDatepicker"
+        [(ngModel)]="entry.date"
+        placeholder="YYYY-MM-DD"
+        (focus)="d.open()"
+        name="date"
+        id="date"
+        type="text" />
   </div>
-  <input [(ngModel)]="entry.gallons" placeholder="gallons" name="gallons" type="number" />
-  <input [(ngModel)]="entry.odometer" placeholder="odometer" name="odometer" type="number" />
-  <input [(ngModel)]="entry.totalPrice" placeholder="Total Cost" name="totalPrice" type="number" />
+  <div class="form-group">
+    <label for="gallons">Gallons</label>
+    <input class="form-control" [(ngModel)]="entry.gallons" name="gallons" id="gallons" type="number" />
+  </div>
+  <div class="form-group">
+    <label for="odometer">Odometer</label>
+    <input class="form-control" [(ngModel)]="entry.odometer" name="odometer" id="odometer" type="number" />
+  </div>
+  <div class="form-group">
+    <label for="totalPrice">Total Cost</label>
+    <input class="form-control" [(ngModel)]="entry.totalPrice" name="totalPrice" id="totalPrice" type="number" />
+  </div>
 
   <button type="submit"
           class="btn btn-primary"
-          [disabled]="entry.isEmpty()"
-          (click)="createEntry()">Add Entry</button>
+          [disabled]="entry.isEmpty()">Add Entry</button>
 </form>

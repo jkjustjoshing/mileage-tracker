@@ -17,7 +17,7 @@ export class EntriesService {
     if (!this.entries[uid]) {
       this.entries[uid] = this.getEntries(uid);
     }
-    this.entries[uid].push(entry);
+    return this.entries[uid].push(entry);
   }
 
   getEntries(uid): FirebaseListObservable<Entry[]> {
