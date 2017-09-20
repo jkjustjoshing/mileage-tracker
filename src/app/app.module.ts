@@ -20,7 +20,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { EntryDetailsComponent } from './entries/entry-details/entry-details.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthGuardService, NotAuthGuardService } from './auth/auth-guard.service';
 import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
@@ -45,7 +45,7 @@ import { SignupComponent } from './auth/signup/signup.component';
     AngularFireAuthModule,
     NgbModule.forRoot()
   ],
-  providers: [EntriesService, AuthService, AuthGuardService],
+  providers: [EntriesService, AuthService, AuthGuardService, NotAuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

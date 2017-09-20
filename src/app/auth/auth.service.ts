@@ -29,11 +29,12 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['/']).then(() => this.angularFireAuth.auth.signOut());
+    this.angularFireAuth.auth.signOut();
+    return this.router.navigate(['/login']);
   }
 
   private redirectOnLogin(user: User) {
-    return this.router.navigate(['/user', user.email, 'vehicles']);
+    return this.router.navigate(['/user', user.uid, 'vehicles']);
   }
 
 }

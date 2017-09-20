@@ -4,31 +4,28 @@ import { Entry } from './entry.model';
 import { EntriesService } from './entries.service';
 
 import { FirebaseListObservable } from 'angularfire2/database';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
   styleUrls: ['./entries.component.scss']
 })
-export class EntriesComponent implements OnInit, OnDestroy {
-  entries: FirebaseListObservable<Entry[]>;
+export class EntriesComponent implements OnInit {
+  entries: Entry[];
   totalGallons: number;
-  subscription: Subscription;
-
 
   constructor(private entriesService: EntriesService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     const uid = this.route.snapshot.params.uid;
-    this.entries = this.entriesService.getEntries(uid);
-    this.subscription = this.entriesService.totalGallons(uid).subscribe(gallons => {
-      this.totalGallons = gallons;
+    const subscription = this.entriesService.getEntries(uid).subscribe(entries => {
+      this.entries = entries;
+      subscription.unsubscribe();
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    const otherSub = this.entriesService.totalGallons(uid).subscribe(gallons => {
+      this.totalGallons = gallons;
+      otherSub.unsubscribe();
+    });
   }
 
 }
