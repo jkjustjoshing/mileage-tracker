@@ -1,5 +1,6 @@
 import { User } from 'firebase';
 import { AuthService } from './../auth/auth.service';
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -8,14 +9,12 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public currentUser: User = <User> {};
+  public currentUser: Observable<User>;
 
   constructor (private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.loggedInState.subscribe(user => {
-      this.currentUser = user;
-    });
+    this.currentUser = this.authService.loggedInState;
   }
 
   onLogout() {

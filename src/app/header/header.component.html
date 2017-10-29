@@ -4,7 +4,7 @@
       <span class="navbar-toggler-icon"></span>
     </button> -->
 
-  <ul class="navbar-nav" *ngIf="currentUser">
+  <ul class="navbar-nav" *ngIf="currentUser | async; let currentUser">
     <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
     <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
   </ul>
@@ -14,14 +14,14 @@
       Dropdown button
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-      <ng-template [ngIf]="!currentUser">
-        <app-nav-link target="/login">Login</app-nav-link>
-        <app-nav-link target="/signup">Signup</app-nav-link>
-      </ng-template>
-      <ng-template [ngIf]="currentUser">
+      <ng-container *ngIf="currentUser | async; let currentUser; else loggedOut">
         <button class="dropdown-item" (click)="onLogout()" type="button">Logout</button>
         <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
         <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
+      </ng-container>
+      <ng-template #loggedOut>
+        <app-nav-link target="/login">Login</app-nav-link>
+        <app-nav-link target="/signup">Signup</app-nav-link>
       </ng-template>
     </div>
   </div>
