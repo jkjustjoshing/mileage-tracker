@@ -1,5 +1,5 @@
 <a class="btn btn-warning" routerLink="..">Cancel</a>
-<form name="newEntry" (submit)="createEntry()">
+<form name="newEntry" (submit)="createEntry(entry)">
   <div class="form-group">
     <label for="date">Date</label>
       <input class="form-control"
@@ -24,7 +24,5 @@
     <input class="form-control" [(ngModel)]="entry.totalPrice" name="totalPrice" id="totalPrice" type="number" />
   </div>
 
-  <button type="submit"
-          class="btn btn-primary"
-          [disabled]="entry.isEmpty()">Add Entry</button>
+  <button type="submit" class="btn btn-primary">Add Entry</button>
 </form>

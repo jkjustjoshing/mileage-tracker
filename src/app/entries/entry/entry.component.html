@@ -1,6 +1,6 @@
 <div *ngIf="entry" class="card" [routerLink]="entry.$key">
   <div class="card-header">
-    {{ entry.date }}
+    {{ entry.date | date }}
   </div>
   <div class="card-body">
     <div class="card-text">

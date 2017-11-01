@@ -5,14 +5,29 @@ export interface EntryDbModel {
   totalPrice: number;
 }
 
+export interface EntryInput {
+  date: {
+    day: number,
+    year: number,
+    month: number
+  };
+  odometer: number;
+  gallons: number;
+  totalPrice: number;
+}
+
 export class Entry {
   date: Date;
   odometer: number;
   gallons: number;
   totalPrice: number;
 
-  constructor ({date, odometer, gallons, totalPrice}: EntryDbModel = <EntryDbModel> {}) {
-    this.date = new Date(date);
+  constructor ({date, odometer, gallons, totalPrice}: EntryDbModel | EntryInput = <EntryDbModel> {}) {
+    if (typeof date === 'number') {
+      this.date = new Date(date);
+    } else {
+      this.date = new Date(date.year, date.month - 1, date.day);
+    }
     this.odometer = odometer;
     this.gallons = gallons;
     this.totalPrice = totalPrice;

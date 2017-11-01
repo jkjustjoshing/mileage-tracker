@@ -17,7 +17,7 @@ export class EntriesService {
     if (!this.entries[uid]) {
       this.getEntries(uid);
     }
-    return this.entries[uid].push(entry);
+    return this.entries[uid].push(entry.serialize());
   }
 
   getEntries(uid): Observable<Entry[]> {
