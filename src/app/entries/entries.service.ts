@@ -22,7 +22,7 @@ export class EntriesService {
 
   getEntries(uid): Observable<Entry[]> {
     if (!this.entries[uid]) {
-      this.entries[uid] = this.angularFireDb.list(`/entries/${uid}`);
+      this.entries[uid] = this.angularFireDb.list(`/${uid}/entries`);
     }
     return this.entries[uid].map((entries: EntryDbModel[]) => {
       return entries.map(entry => {
@@ -44,7 +44,7 @@ export class EntriesService {
 
   getEntry(uid: string, id: string): FirebaseObjectObservable<Entry> {
     console.log('getting entry');
-    return this.angularFireDb.object(`/entries/${uid}/${id}`);
+    return this.angularFireDb.object(`/${uid}/entries/${id}`);
   }
 
 }
