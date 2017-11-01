@@ -3,6 +3,7 @@ export interface EntryDbModel {
   odometer: number;
   gallons: number;
   totalPrice: number;
+  $key?: string;
 }
 
 export interface EntryInput {
@@ -16,13 +17,20 @@ export interface EntryInput {
   totalPrice: number;
 }
 
+function isEntryDbModel (entry: any): entry is EntryDbModel {
+  return Boolean(entry && entry.$key);
+}
+
 export class Entry {
   date: Date;
   odometer: number;
   gallons: number;
   totalPrice: number;
+  $key?: string;
 
-  constructor ({date, odometer, gallons, totalPrice}: EntryDbModel | EntryInput = <EntryDbModel> {}) {
+  constructor (data: EntryDbModel | EntryInput = <EntryDbModel> {}) {
+    const {date, odometer, gallons, totalPrice} = data;
+
     if (typeof date === 'number') {
       this.date = new Date(date);
     } else {
@@ -31,6 +39,10 @@ export class Entry {
     this.odometer = odometer;
     this.gallons = gallons;
     this.totalPrice = totalPrice;
+
+    if (isEntryDbModel(data)) {
+      this.$key = data.$key;
+    }
   }
 
   isEmpty() {
@@ -42,7 +54,8 @@ export class Entry {
       date: this.date.getTime(),
       odometer: this.odometer,
       gallons: this.gallons,
-      totalPrice: this.totalPrice
+      totalPrice: this.totalPrice,
+      $key: this.$key
     };
   }
 }
