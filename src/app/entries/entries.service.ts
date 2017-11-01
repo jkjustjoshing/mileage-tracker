@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Entry } from './entry.model';
+import { Entry, EntryDbModel } from './entry.model';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/Rx';
@@ -8,23 +8,27 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 
 @Injectable()
 export class EntriesService {
-  private entries: { [name: string]: FirebaseListObservable<Entry[]> } = {};
+  private entries: { [name: string]: FirebaseListObservable<EntryDbModel[]> } = {};
   private totalGallonsCache: { [name: string]: Observable<number> } = {};
 
   constructor(private angularFireDb: AngularFireDatabase) {}
 
   addEntry(uid: string, entry: Entry) {
     if (!this.entries[uid]) {
-      this.entries[uid] = this.getEntries(uid);
+      this.getEntries(uid);
     }
     return this.entries[uid].push(entry);
   }
 
-  getEntries(uid): FirebaseListObservable<Entry[]> {
+  getEntries(uid): Observable<Entry[]> {
     if (!this.entries[uid]) {
       this.entries[uid] = this.angularFireDb.list(`/entries/${uid}`);
     }
-    return this.entries[uid];
+    return this.entries[uid].map((entries: EntryDbModel[]) => {
+      return entries.map(entry => {
+        return new Entry(entry);
+      });
+    });
   }
 
   totalGallons(uid): Observable<number> {

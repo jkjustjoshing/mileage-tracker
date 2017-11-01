@@ -1,4 +1,4 @@
-<div class="card" [routerLink]="entry.$key">
+<div *ngIf="entry" class="card" [routerLink]="entry.$key">
   <div class="card-header">
     {{ entry.date }}
   </div>
