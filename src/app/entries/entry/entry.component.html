@@ -1,4 +1,4 @@
-<div *ngIf="entry" class="card" [routerLink]="entry.$key">
+<mat-card *ngIf="entry" class="card" [routerLink]="entry.$key">
   <div class="card-header">
     {{ entry.date | date }}
   </div>
@@ -9,4 +9,4 @@
       <p>Cost: {{ entry.totalPrice }}</p>
     </div>
   </div>
-</div>
+</mat-card>

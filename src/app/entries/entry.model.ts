@@ -33,6 +33,8 @@ export class Entry {
 
     if (typeof date === 'number') {
       this.date = new Date(date);
+    } else if (date instanceof Date) {
+      this.date = date;
     } else {
       this.date = new Date(date.year, date.month - 1, date.day);
     }
@@ -55,7 +57,7 @@ export class Entry {
       odometer: this.odometer,
       gallons: this.gallons,
       totalPrice: this.totalPrice,
-      $key: this.$key
+      ...(this.$key ? { $key: this.$key } : {}) // only have a $key property if it exists
     };
   }
 }

@@ -1,3 +1,35 @@
-<a class="btn btn-primary" routerLink="./new">New Entry</a>
+<a mat-button routerLink="./new">New Entry</a>
 <p> Total Gallons: {{ totalGallons | async }}</p>
-<app-entry *ngFor="let entry of entries | async" [entry]="entry"></app-entry>
+
+<mat-table #table [dataSource]="dataSource">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
+  </ng-container>
+
+  <!-- Progress Column -->
+  <ng-container matColumnDef="odometer">
+    <mat-header-cell *matHeaderCellDef> Odometer </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.odometer}} miles</mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="gallons">
+    <mat-header-cell *matHeaderCellDef> Gallons </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.gallons}} </mat-cell>
+  </ng-container>
+
+  <!-- Color Column -->
+  <ng-container matColumnDef="totalPrice">
+    <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.totalPrice}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
