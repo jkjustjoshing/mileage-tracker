@@ -1,28 +1,15 @@
-<nav class="navbar navbar-expand navbar-light bg-light">
-  <a class="navbar-brand" routerLink="/">Mileage Tracker</a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
+<mat-toolbar color="primary">
+  <span>Application Title</span>
 
-  <ul class="navbar-nav" *ngIf="currentUser | async; let currentUser">
-    <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
-    <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
-  </ul>
+  <!-- This fills the remaining space of the current row -->
+  <span class="spacer"></span>
 
-  <div ngbDropdown>
-    <button class="btn btn-secondary" type="button" ngbDropdownToggle id="dropdownMenuButton">
-      Dropdown button
-    </button>
-    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-      <ng-container *ngIf="currentUser | async; let currentUser; else loggedOut">
-        <button class="dropdown-item" (click)="onLogout()" type="button">Logout</button>
-        <app-nav-link [target]="['/user', currentUser.uid, 'vehicles']">Vehicles</app-nav-link>
-        <app-nav-link [target]="['/user', currentUser.uid, 'entries']">Entries</app-nav-link>
-      </ng-container>
-      <ng-template #loggedOut>
-        <app-nav-link target="/login">Login</app-nav-link>
-        <app-nav-link target="/signup">Signup</app-nav-link>
-      </ng-template>
-    </div>
-  </div>
-</nav>
+  <ng-container *ngIf="currentUser | async; let currentUser; else loggedOut">
+    <a mat-button [routerLink]="['/user', currentUser?.uid, 'entries']">Entries</a>
+    <button mat-button (click)="onLogout()" type="button">Log out</button>
+  </ng-container>
+
+  <ng-template #loggedOut>
+    <a mat-button routerLink="/login">Log in</a>
+  </ng-template>
+</mat-toolbar>
